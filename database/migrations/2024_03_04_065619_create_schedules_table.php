@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('id_tournament');
-            $table->foreign('id_tournament')->references('id')->on('tournaments');
+            $table->unsignedBigInteger('id_game');
+            $table->foreign('id_game')->references('id')->on('games');
             $table->integer('status');
             $table->timestamps();
         });
