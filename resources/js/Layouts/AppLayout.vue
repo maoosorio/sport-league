@@ -51,6 +51,30 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Panel
                                 </NavLink>
+                                <!-- <NavLink :href="route('league')">
+                                    Ligas
+                                </NavLink>
+                                <NavLink :href="route('tournament')">
+                                    Torneos
+                                </NavLink>
+                                <NavLink :href="route('team')">
+                                    Equipos
+                                </NavLink>
+                                <NavLink :href="route('player')">
+                                    Jugadores
+                                </NavLink>
+                                <NavLink :href="route('referee')">
+                                    Arbitros
+                                </NavLink>
+                                <NavLink :href="route('field')">
+                                    Campos
+                                </NavLink>
+                                <NavLink :href="route('game')">
+                                    Juegos
+                                </NavLink>
+                                <NavLink :href="route('result')">
+                                    Resultados
+                                </NavLink> -->
                             </div>
                         </div>
 
