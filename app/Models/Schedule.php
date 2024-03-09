@@ -2,22 +2,48 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Schedule
+ *
+ * @property $id
+ * @property $name
+ * @property $id_game
+ * @property $status
+ * @property $created_at
+ * @property $updated_at
+ *
+ * @property Game $game
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Schedule extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'id_game',
-        'status',
+    
+    static $rules = [
+		'name' => 'required',
+		'id_game' => 'required',
+		'status' => 'required',
     ];
 
-    public function game(): HasMany
+    protected $perPage = 20;
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name','id_game','status'];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function game()
     {
-        return $this->hasMany(Game::class);
+        return $this->hasOne('App\Models\Game', 'id', 'id_game');
     }
+    
+
 }

@@ -2,24 +2,49 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Field
+ *
+ * @property $id
+ * @property $name
+ * @property $location
+ * @property $field_photo_path
+ * @property $status
+ * @property $created_at
+ * @property $updated_at
+ *
+ * @property Game[] $games
+ * @package App
+ * @mixin \Illuminate\Database\Eloquent\Builder
+ */
 class Field extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'location',
-        'capacity',
-        'field_photo_path',
-        'status',
+    
+    static $rules = [
+		'name' => 'required',
+		'location' => 'required',
+		'status' => 'required',
     ];
 
-    public function game(): HasMany
+    protected $perPage = 20;
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name','location','field_photo_path','status'];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function games()
     {
-        return $this->hasMany(Game::class);
+        return $this->hasMany('App\Models\Game', 'field_id', 'id');
     }
+    
+
 }
