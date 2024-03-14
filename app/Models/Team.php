@@ -35,7 +35,6 @@ class Team extends Model
 		'coach' => 'required',
 		'foundation' => 'required',
 		'id_league' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

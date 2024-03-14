@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
@@ -36,3 +37,4 @@ Route::resource('/games', GameController::class);
 Route::resource('/schedules', ScheduleController::class);
 Route::resource('/actions', ActionController::class);
 Route::resource('/statistics', StatisticController::class);
+Route::resource('/admins', AdminController::class);

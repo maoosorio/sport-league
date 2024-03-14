@@ -30,7 +30,6 @@ class Player extends Model
 		'position' => 'required',
 		'number' => 'required',
 		'birthdate' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

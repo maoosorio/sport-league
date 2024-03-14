@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                             <img class='' src='../../assets/tablar-logo.png' height='200' />
+                             <img class='img-fluid' src='{{asset(config("tablar.auth_logo.img.path","assets/tablar-logo.png"))}}' height='200' />
                         </div>
                     </div>
                 </div>

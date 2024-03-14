@@ -25,7 +25,6 @@ class Field extends Model
     static $rules = [
 		'name' => 'required',
 		'location' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

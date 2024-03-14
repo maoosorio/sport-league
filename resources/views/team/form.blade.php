@@ -1,73 +1,73 @@
 
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('name') }}</label>
+    <label class="form-label">   {{ Form::label('Nombre') }}</label>
     <div>
         {{ Form::text('name', $team->name, ['class' => 'form-control' .
-        ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+        ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Nombre']) }}
         {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>name</b> instruction.</small>
+        <small class="form-hint">equipo <b>nombre</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('owner') }}</label>
+    <label class="form-label">   {{ Form::label('Propietario') }}</label>
     <div>
         {{ Form::text('owner', $team->owner, ['class' => 'form-control' .
-        ($errors->has('owner') ? ' is-invalid' : ''), 'placeholder' => 'Owner']) }}
+        ($errors->has('owner') ? ' is-invalid' : ''), 'placeholder' => 'Propietario']) }}
         {!! $errors->first('owner', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>owner</b> instruction.</small>
+        <small class="form-hint">equipo <b>propietario</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('coach') }}</label>
+    <label class="form-label">   {{ Form::label('Entrenador') }}</label>
     <div>
         {{ Form::text('coach', $team->coach, ['class' => 'form-control' .
-        ($errors->has('coach') ? ' is-invalid' : ''), 'placeholder' => 'Coach']) }}
+        ($errors->has('coach') ? ' is-invalid' : ''), 'placeholder' => 'Entrenador']) }}
         {!! $errors->first('coach', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>coach</b> instruction.</small>
+        <small class="form-hint">equipo <b>entrenador</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('foundation') }}</label>
+    <label class="form-label">   {{ Form::label('Fundacion') }}</label>
     <div>
         {{ Form::text('foundation', $team->foundation, ['class' => 'form-control' .
-        ($errors->has('foundation') ? ' is-invalid' : ''), 'placeholder' => 'Foundation']) }}
+        ($errors->has('foundation') ? ' is-invalid' : ''), 'placeholder' => 'Fundacion']) }}
         {!! $errors->first('foundation', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>foundation</b> instruction.</small>
+        <small class="form-hint">equipo <b>fundacion</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('team_photo_path') }}</label>
+    <label class="form-label">   {{ Form::label('Escudo') }}</label>
+    @if ($team->team_photo_path <> null)
+    <div class="mb-2">
+        <img src="{{ asset($team->team_photo_path) }}" alt="{{ $team->name }}" width = "150">
+    </div>
+    @endif
     <div>
-        {{ Form::text('team_photo_path', $team->team_photo_path, ['class' => 'form-control' .
-        ($errors->has('team_photo_path') ? ' is-invalid' : ''), 'placeholder' => 'Team Photo Path']) }}
+        {{ Form::file('team_photo_path', null, ['class' => 'form-control-file' .
+        ($errors->has('team_photo_path') ? ' is-invalid' : ''), 'placeholder' => 'Escudo']) }}
         {!! $errors->first('team_photo_path', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>team_photo_path</b> instruction.</small>
+        <small class="form-hint">equipo <b>escudo</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('id_league') }}</label>
+    <label class="form-label">   {{ Form::label('Liga') }}</label>
     <div>
-        {{ Form::text('id_league', $team->id_league, ['class' => 'form-control' .
-        ($errors->has('id_league') ? ' is-invalid' : ''), 'placeholder' => 'Id League']) }}
+        <select name="id_league" id="id_league" class="form-control select2bs4 @error('id_league') is-invalid @enderror">
+            @foreach ($league as $league)
+            <option value="{{ $league->id }}" {{ old('id_league') == $league->id ? 'selected=selected' : '' }}>
+                    {{ $league->name }}
+            @endforeach
+        </select>
         {!! $errors->first('id_league', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>id_league</b> instruction.</small>
-    </div>
-</div>
-<div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('status') }}</label>
-    <div>
-        {{ Form::text('status', $team->status, ['class' => 'form-control' .
-        ($errors->has('status') ? ' is-invalid' : ''), 'placeholder' => 'Status']) }}
-        {!! $errors->first('status', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">team <b>status</b> instruction.</small>
+        <small class="form-hint">equipo <b>liga</b> requerido.</small>
     </div>
 </div>
 
     <div class="form-footer">
         <div class="text-end">
             <div class="d-flex">
-                <a href="#" class="btn btn-danger">Cancel</a>
-                <button type="submit" class="btn btn-primary ms-auto ajax-submit">Submit</button>
+                <a href="{{ route('teams.index') }}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary ms-auto ajax-submit">Guardar</button>
             </div>
         </div>
     </div>

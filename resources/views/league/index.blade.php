@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    League
+    Liga
 @endsection
 
 @section('content')
@@ -12,10 +12,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        List
+                        Lista
                     </div>
                     <h2 class="page-title">
-                        {{ __('League ') }}
+                        {{ __('Ligas ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -30,7 +30,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Create League
+                            Crear Liga
                         </a>
                     </div>
                 </div>
@@ -47,20 +47,20 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">League</h3>
+                            <h3 class="card-title">Liga</h3>
                         </div>
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
                                 <div class="text-muted">
-                                    Show
+                                    Mostrar
                                     <div class="mx-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm" value="10" size="3"
                                                aria-label="Invoices count">
                                     </div>
-                                    entries
+                                    registros
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
+                                    Buscar:
                                     <div class="ms-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm"
                                                aria-label="Search invoice">
@@ -85,9 +85,9 @@
                                         </svg>
                                     </th>
                                     
-										<th>Name</th>
-										<th>Id User</th>
-										<th>Status</th>
+										<th>Nombre</th>
+										<th>Administrador</th>
+                                        <th>Telefono</th>
 
                                     <th class="w-1"></th>
                                 </tr>
@@ -101,24 +101,24 @@
                                         <td>{{ ++$i }}</td>
                                         
 											<td>{{ $league->name }}</td>
-											<td>{{ $league->id_user }}</td>
-											<td>{{ $league->status }}</td>
+											<td>{{ $league->admin->name }}</td>
+											<td>{{ $league->admin->phone }}</td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
                                                     <button class="btn dropdown-toggle align-text-top"
                                                             data-bs-toggle="dropdown">
-                                                        Actions
+                                                        Acciones
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
                                                            href="{{ route('leagues.show',$league->id) }}">
-                                                            View
+                                                            Ver
                                                         </a>
                                                         <a class="dropdown-item"
                                                            href="{{ route('leagues.edit',$league->id) }}">
-                                                            Edit
+                                                            Editar
                                                         </a>
                                                         <form
                                                             action="{{ route('leagues.destroy',$league->id) }}"
@@ -126,10 +126,10 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
+                                                                    onclick="if(!confirm('Estas seguro?')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
-                                                                Delete
+                                                                Borrar
                                                             </button>
                                                         </form>
                                                     </div>
@@ -138,7 +138,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <td>No Data Found</td>
+                                    <td>Sin datos</td>
                                 @endforelse
                                 </tbody>
 

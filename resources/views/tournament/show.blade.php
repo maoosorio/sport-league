@@ -1,6 +1,6 @@
 @extends('tablar::page')
 
-@section('title', 'View Tournament')
+@section('title', 'Ver Torneo')
 
 @section('content')
     <!-- Page header -->
@@ -10,10 +10,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        View
+                        Ver
                     </div>
                     <h2 class="page-title">
-                        {{ __('Tournament ') }}
+                        {{ __('Torneo ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Tournament List
+                            Regresar
                         </a>
                     </div>
                 </div>
@@ -45,21 +45,17 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Tournament Details</h3>
+                            <h3 class="card-title">Torneo Detalles</h3>
                         </div>
                         <div class="card-body">
                             
 <div class="form-group">
-<strong>Name:</strong>
+<strong>Nombre:</strong>
 {{ $tournament->name }}
 </div>
 <div class="form-group">
-<strong>Id League:</strong>
-{{ $tournament->id_league }}
-</div>
-<div class="form-group">
-<strong>Status:</strong>
-{{ $tournament->status }}
+<strong>Liga:</strong>
+{{ $tournament->league->name }}
 </div>
 
                         </div>

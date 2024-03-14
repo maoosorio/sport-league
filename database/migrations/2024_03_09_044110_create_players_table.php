@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('number');
             $table->string('birthdate');
             $table->string('player_photo_path', 2048)->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

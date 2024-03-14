@@ -18,7 +18,7 @@ class PlayerController extends Controller
      */
     public function index()
     {
-        $players = Player::paginate(10);
+        $players = Player::where('status',1)->paginate(10);
 
         return view('player.index', compact('players'))
             ->with('i', (request()->input('page', 1) - 1) * $players->perPage());
@@ -48,7 +48,7 @@ class PlayerController extends Controller
         $player = Player::create($request->all());
 
         return redirect()->route('players.index')
-            ->with('success', 'Player created successfully.');
+            ->with('success', 'Jugador creado correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class PlayerController extends Controller
         $player->update($request->all());
 
         return redirect()->route('players.index')
-            ->with('success', 'Player updated successfully');
+            ->with('success', 'Jugador actualizado correctamente.');
     }
 
     /**
@@ -101,9 +101,9 @@ class PlayerController extends Controller
      */
     public function destroy($id)
     {
-        $player = Player::find($id)->delete();
+        $player = Player::find($id)->update(['status' => 0]);
 
         return redirect()->route('players.index')
-            ->with('success', 'Player deleted successfully');
+            ->with('success', 'Jugador eliminado correctamente.');
     }
 }

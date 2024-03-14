@@ -23,7 +23,6 @@ class Referee extends Model
     
     static $rules = [
 		'name' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

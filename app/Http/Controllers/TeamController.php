@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\League;
 use App\Models\Team;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -18,7 +21,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Team::paginate(10);
+        $teams = Team::where('status',1)->paginate(10);
 
         return view('team.index', compact('teams'))
             ->with('i', (request()->input('page', 1) - 1) * $teams->perPage());
@@ -32,7 +35,8 @@ class TeamController extends Controller
     public function create()
     {
         $team = new Team();
-        return view('team.create', compact('team'));
+        $league = League::get();
+        return view('team.create', compact('team','league'));
     }
 
     /**
@@ -45,10 +49,20 @@ class TeamController extends Controller
     {
         request()->validate(Team::$rules);
 
-        $team = Team::create($request->all());
+        $data = $request->all();
+
+        if($request->has('team_photo_path')){
+            $file = $request->file('team_photo_path');
+            $destinationPath = 'images/teams/';
+            $filename = time().'-'. $file->getClientOriginalName();
+            $uploadSuccess = $request ->file('team_photo_path')->move($destinationPath,$filename);
+            $data['team_photo_path'] = $destinationPath . $filename;
+        }
+
+        $team = Team::create($data);
 
         return redirect()->route('teams.index')
-            ->with('success', 'Team created successfully.');
+            ->with('success', 'Equipo creado correctamente.');
     }
 
     /**
@@ -73,8 +87,9 @@ class TeamController extends Controller
     public function edit($id)
     {
         $team = Team::find($id);
+        $league = League::get();
 
-        return view('team.edit', compact('team'));
+        return view('team.edit', compact('team','league'));
     }
 
     /**
@@ -91,7 +106,7 @@ class TeamController extends Controller
         $team->update($request->all());
 
         return redirect()->route('teams.index')
-            ->with('success', 'Team updated successfully');
+            ->with('success', 'Equipo actualizado correctamente.');
     }
 
     /**
@@ -101,9 +116,9 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        $team = Team::find($id)->delete();
+        $team = Team::find($id)->update(['status' => 0]);
 
         return redirect()->route('teams.index')
-            ->with('success', 'Team deleted successfully');
+            ->with('success', 'Equipo eliminado correctamente.');
     }
 }

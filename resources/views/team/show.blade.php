@@ -1,6 +1,6 @@
 @extends('tablar::page')
 
-@section('title', 'View Team')
+@section('title', 'Ver Equipo')
 
 @section('content')
     <!-- Page header -->
@@ -10,10 +10,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        View
+                        Ver
                     </div>
                     <h2 class="page-title">
-                        {{ __('Team ') }}
+                        {{ __('Equipo ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Team List
+                            Regresar
                         </a>
                     </div>
                 </div>
@@ -45,37 +45,33 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Team Details</h3>
+                            <h3 class="card-title">Equipo Detalles</h3>
                         </div>
                         <div class="card-body">
                             
 <div class="form-group">
-<strong>Name:</strong>
+<strong>Nombre:</strong>
 {{ $team->name }}
 </div>
 <div class="form-group">
-<strong>Owner:</strong>
+<strong>Propietario:</strong>
 {{ $team->owner }}
 </div>
 <div class="form-group">
-<strong>Coach:</strong>
+<strong>Entrenador:</strong>
 {{ $team->coach }}
 </div>
 <div class="form-group">
-<strong>Foundation:</strong>
+<strong>Fundacion:</strong>
 {{ $team->foundation }}
 </div>
 <div class="form-group">
-<strong>Team Photo Path:</strong>
-{{ $team->team_photo_path }}
+<strong>Liga:</strong>
+{{ $team->league->name }}
 </div>
 <div class="form-group">
-<strong>Id League:</strong>
-{{ $team->id_league }}
-</div>
-<div class="form-group">
-<strong>Status:</strong>
-{{ $team->status }}
+<strong>Logo:</strong>
+<img class="img img-fluid" src="{{ asset($team->team_photo_path) }}" alt="{{ $team->name }}" width = "150" />
 </div>
 
                         </div>

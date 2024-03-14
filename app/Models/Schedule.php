@@ -24,7 +24,6 @@ class Schedule extends Model
     static $rules = [
 		'name' => 'required',
 		'id_game' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

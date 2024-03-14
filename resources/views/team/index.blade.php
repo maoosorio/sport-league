@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    Team
+    Equipo
 @endsection
 
 @section('content')
@@ -12,10 +12,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        List
+                        Lista
                     </div>
                     <h2 class="page-title">
-                        {{ __('Team ') }}
+                        {{ __('Equipos ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -30,7 +30,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Create Team
+                            Crear Equipo
                         </a>
                     </div>
                 </div>
@@ -52,15 +52,15 @@
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
                                 <div class="text-muted">
-                                    Show
+                                    Mostrar
                                     <div class="mx-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm" value="10" size="3"
                                                aria-label="Invoices count">
                                     </div>
-                                    entries
+                                    registros
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
+                                    Buscar:
                                     <div class="ms-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm"
                                                aria-label="Search invoice">
@@ -85,13 +85,10 @@
                                         </svg>
                                     </th>
                                     
-										<th>Name</th>
-										<th>Owner</th>
-										<th>Coach</th>
-										<th>Foundation</th>
-										<th>Team Photo Path</th>
-										<th>Id League</th>
-										<th>Status</th>
+										<th>Nombre</th>
+										<th>Propietario</th>
+										<th>Liga</th>
+										<th>Escudo</th>
 
                                     <th class="w-1"></th>
                                 </tr>
@@ -106,27 +103,24 @@
                                         
 											<td>{{ $team->name }}</td>
 											<td>{{ $team->owner }}</td>
-											<td>{{ $team->coach }}</td>
-											<td>{{ $team->foundation }}</td>
-											<td>{{ $team->team_photo_path }}</td>
-											<td>{{ $team->id_league }}</td>
-											<td>{{ $team->status }}</td>
+											<td>{{ $team->league->name }}</td>
+											<td><img src="{{ asset($team->team_photo_path) }}" alt="{{ $team->name }}" width = "100"></td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
                                                     <button class="btn dropdown-toggle align-text-top"
                                                             data-bs-toggle="dropdown">
-                                                        Actions
+                                                        Acciones
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
                                                            href="{{ route('teams.show',$team->id) }}">
-                                                            View
+                                                            Ver
                                                         </a>
                                                         <a class="dropdown-item"
                                                            href="{{ route('teams.edit',$team->id) }}">
-                                                            Edit
+                                                            Editar
                                                         </a>
                                                         <form
                                                             action="{{ route('teams.destroy',$team->id) }}"
@@ -134,10 +128,10 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                    onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
+                                                                    onclick="if(!confirm('Estas seguro?')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
-                                                                Delete
+                                                                Borrar
                                                             </button>
                                                         </form>
                                                     </div>
@@ -146,7 +140,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <td>No Data Found</td>
+                                    <td>Sin Datos</td>
                                 @endforelse
                                 </tbody>
 

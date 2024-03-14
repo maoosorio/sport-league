@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('team_photo_path', 2048)->nullable();
             $table->unsignedBigInteger('id_league');
             $table->foreign('id_league')->references('id')->on('leagues');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

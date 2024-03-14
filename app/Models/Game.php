@@ -43,7 +43,6 @@ class Game extends Model
 		'referee_id' => 'required',
 		'day' => 'required',
 		'time' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

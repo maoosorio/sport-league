@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('leagues', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->integer('status');
+            $table->unsignedBigInteger('id_admin');
+            $table->foreign('id_admin')->references('id')->on('admins');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

@@ -72,7 +72,7 @@ return [
 
     'layout_light_sidebar' => null,
     'layout_light_topbar' => true,
-    'layout_enable_top_header' => false,
+    'layout_enable_top_header' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -146,8 +146,14 @@ return [
         // Navbar items:
         [
             'text' => 'Inicio',
-            'icon' => 'ti ti-home',
-            'url' => '/home'
+            'url' => '/home',
+            'icon' => 'ti ti-home'
+        ],
+
+        [
+            'text' => 'Administradores',
+            'url' => '/admins',
+            'icon' => 'ti ti-user-shield'
         ],
 
         [

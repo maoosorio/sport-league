@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

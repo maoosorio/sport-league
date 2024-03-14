@@ -34,7 +34,6 @@ class Action extends Model
 		'action' => 'required',
 		'value' => 'required',
 		'time' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

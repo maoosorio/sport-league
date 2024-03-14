@@ -18,7 +18,7 @@ class ActionController extends Controller
      */
     public function index()
     {
-        $actions = Action::paginate(10);
+        $actions = Action::where('status',1)->paginate(10);
 
         return view('action.index', compact('actions'))
             ->with('i', (request()->input('page', 1) - 1) * $actions->perPage());
@@ -48,7 +48,7 @@ class ActionController extends Controller
         $action = Action::create($request->all());
 
         return redirect()->route('actions.index')
-            ->with('success', 'Action created successfully.');
+            ->with('success', 'Accion creada correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class ActionController extends Controller
         $action->update($request->all());
 
         return redirect()->route('actions.index')
-            ->with('success', 'Action updated successfully');
+            ->with('success', 'Accion actualizada correctamente');
     }
 
     /**
@@ -101,9 +101,9 @@ class ActionController extends Controller
      */
     public function destroy($id)
     {
-        $action = Action::find($id)->delete();
+        $action = Action::find($id)->update(['status' => 0]);
 
         return redirect()->route('actions.index')
-            ->with('success', 'Action deleted successfully');
+            ->with('success', 'Accion eliminada correctamente');
     }
 }

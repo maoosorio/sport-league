@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreign('game_id')->references('id')->on('games');
             $table->foreign('team_id')->references('id')->on('teams');
             $table->foreign('player_id')->references('id')->on('players');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

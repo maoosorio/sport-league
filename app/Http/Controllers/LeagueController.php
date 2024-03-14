@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\League;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 
 /**
@@ -18,7 +19,7 @@ class LeagueController extends Controller
      */
     public function index()
     {
-        $leagues = League::paginate(10);
+        $leagues = League::where('status',1)->paginate(10);
 
         return view('league.index', compact('leagues'))
             ->with('i', (request()->input('page', 1) - 1) * $leagues->perPage());
@@ -32,7 +33,8 @@ class LeagueController extends Controller
     public function create()
     {
         $league = new League();
-        return view('league.create', compact('league'));
+        $admin = Admin::get();
+        return view('league.create', compact('league','admin'));
     }
 
     /**
@@ -48,7 +50,7 @@ class LeagueController extends Controller
         $league = League::create($request->all());
 
         return redirect()->route('leagues.index')
-            ->with('success', 'League created successfully.');
+            ->with('success', 'Liga creada correctamente.');
     }
 
     /**
@@ -73,8 +75,9 @@ class LeagueController extends Controller
     public function edit($id)
     {
         $league = League::find($id);
+        $admin = Admin::get();
 
-        return view('league.edit', compact('league'));
+        return view('league.edit', compact('league','admin'));
     }
 
     /**
@@ -91,7 +94,7 @@ class LeagueController extends Controller
         $league->update($request->all());
 
         return redirect()->route('leagues.index')
-            ->with('success', 'League updated successfully');
+            ->with('success', 'Liga actualizada correctamente.');
     }
 
     /**
@@ -101,9 +104,9 @@ class LeagueController extends Controller
      */
     public function destroy($id)
     {
-        $league = League::find($id)->delete();
+        $league = League::find($id)->update(['status' => 0]);
 
         return redirect()->route('leagues.index')
-            ->with('success', 'League deleted successfully');
+            ->with('success', 'Liga eliminada correctamente.');
     }
 }

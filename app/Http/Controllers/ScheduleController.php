@@ -18,7 +18,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = Schedule::paginate(10);
+        $schedules = Schedule::where('status',1)->paginate(10);
 
         return view('schedule.index', compact('schedules'))
             ->with('i', (request()->input('page', 1) - 1) * $schedules->perPage());
@@ -48,7 +48,7 @@ class ScheduleController extends Controller
         $schedule = Schedule::create($request->all());
 
         return redirect()->route('schedules.index')
-            ->with('success', 'Schedule created successfully.');
+            ->with('success', 'Jornada creada correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class ScheduleController extends Controller
         $schedule->update($request->all());
 
         return redirect()->route('schedules.index')
-            ->with('success', 'Schedule updated successfully');
+            ->with('success', 'Jornada actualizada correctamente.');
     }
 
     /**
@@ -101,9 +101,9 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        $schedule = Schedule::find($id)->delete();
+        $schedule = Schedule::find($id)->update(['status' => 0]);
 
         return redirect()->route('schedules.index')
-            ->with('success', 'Schedule deleted successfully');
+            ->with('success', 'Jornada eliminada correctamente.');
     }
 }

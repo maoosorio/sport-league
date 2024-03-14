@@ -18,7 +18,7 @@ class FieldController extends Controller
      */
     public function index()
     {
-        $fields = Field::paginate(10);
+        $fields = Field::where('status',1)->paginate(10);
 
         return view('field.index', compact('fields'))
             ->with('i', (request()->input('page', 1) - 1) * $fields->perPage());
@@ -48,7 +48,7 @@ class FieldController extends Controller
         $field = Field::create($request->all());
 
         return redirect()->route('fields.index')
-            ->with('success', 'Field created successfully.');
+            ->with('success', 'Campo creado correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class FieldController extends Controller
         $field->update($request->all());
 
         return redirect()->route('fields.index')
-            ->with('success', 'Field updated successfully');
+            ->with('success', 'Campo actualizado correctamente.');
     }
 
     /**
@@ -101,9 +101,9 @@ class FieldController extends Controller
      */
     public function destroy($id)
     {
-        $field = Field::find($id)->delete();
+        $field = Field::find($id)->update(['status' => 0]);
 
         return redirect()->route('fields.index')
-            ->with('success', 'Field deleted successfully');
+            ->with('success', 'Campo eliminado correctamente.');
     }
 }

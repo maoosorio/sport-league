@@ -18,7 +18,7 @@ class RefereeController extends Controller
      */
     public function index()
     {
-        $referees = Referee::paginate(10);
+        $referees = Referee::where('status',1)->paginate(10);
 
         return view('referee.index', compact('referees'))
             ->with('i', (request()->input('page', 1) - 1) * $referees->perPage());
@@ -48,7 +48,7 @@ class RefereeController extends Controller
         $referee = Referee::create($request->all());
 
         return redirect()->route('referees.index')
-            ->with('success', 'Referee created successfully.');
+            ->with('success', 'Arbitro creado correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class RefereeController extends Controller
         $referee->update($request->all());
 
         return redirect()->route('referees.index')
-            ->with('success', 'Referee updated successfully');
+            ->with('success', 'Arbitro actualizado correctamente.');
     }
 
     /**
@@ -101,9 +101,9 @@ class RefereeController extends Controller
      */
     public function destroy($id)
     {
-        $referee = Referee::find($id)->delete();
+        $referee = Referee::find($id)->update(['status' => 0]);
 
         return redirect()->route('referees.index')
-            ->with('success', 'Referee deleted successfully');
+            ->with('success', 'Arbitro eliminado correctamente.');
     }
 }

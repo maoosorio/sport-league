@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\League;
 use App\Models\Tournament;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        $tournaments = Tournament::paginate(10);
+        $tournaments = Tournament::where('status',1)->paginate(10);
 
         return view('tournament.index', compact('tournaments'))
             ->with('i', (request()->input('page', 1) - 1) * $tournaments->perPage());
@@ -32,7 +33,8 @@ class TournamentController extends Controller
     public function create()
     {
         $tournament = new Tournament();
-        return view('tournament.create', compact('tournament'));
+        $league = League::get();
+        return view('tournament.create', compact('tournament','league'));
     }
 
     /**
@@ -48,7 +50,7 @@ class TournamentController extends Controller
         $tournament = Tournament::create($request->all());
 
         return redirect()->route('tournaments.index')
-            ->with('success', 'Tournament created successfully.');
+            ->with('success', 'Torneo creado correctamente.');
     }
 
     /**
@@ -73,8 +75,9 @@ class TournamentController extends Controller
     public function edit($id)
     {
         $tournament = Tournament::find($id);
+        $league = League::get();
 
-        return view('tournament.edit', compact('tournament'));
+        return view('tournament.edit', compact('tournament','league'));
     }
 
     /**
@@ -91,7 +94,7 @@ class TournamentController extends Controller
         $tournament->update($request->all());
 
         return redirect()->route('tournaments.index')
-            ->with('success', 'Tournament updated successfully');
+            ->with('success', 'Torneo actualizado correctamente.');
     }
 
     /**
@@ -101,9 +104,9 @@ class TournamentController extends Controller
      */
     public function destroy($id)
     {
-        $tournament = Tournament::find($id)->delete();
+        $tournament = Tournament::find($id)->update(['status' => 0]);
 
         return redirect()->route('tournaments.index')
-            ->with('success', 'Tournament deleted successfully');
+            ->with('success', 'Torneo eliminado correctamente');
     }
 }

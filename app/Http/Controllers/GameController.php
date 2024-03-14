@@ -18,7 +18,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        $games = Game::paginate(10);
+        $games = Game::where('status',1)->paginate(10);
 
         return view('game.index', compact('games'))
             ->with('i', (request()->input('page', 1) - 1) * $games->perPage());
@@ -48,7 +48,7 @@ class GameController extends Controller
         $game = Game::create($request->all());
 
         return redirect()->route('games.index')
-            ->with('success', 'Game created successfully.');
+            ->with('success', 'Juego creado correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class GameController extends Controller
         $game->update($request->all());
 
         return redirect()->route('games.index')
-            ->with('success', 'Game updated successfully');
+            ->with('success', 'Juego actualizado correctamente.');
     }
 
     /**
@@ -101,9 +101,9 @@ class GameController extends Controller
      */
     public function destroy($id)
     {
-        $game = Game::find($id)->delete();
+        $game = Game::find($id)->update(['status' => 0]);
 
         return redirect()->route('games.index')
-            ->with('success', 'Game deleted successfully');
+            ->with('success', 'Juego eliminado correctamente.');
     }
 }

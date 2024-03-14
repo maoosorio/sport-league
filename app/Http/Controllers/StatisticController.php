@@ -18,7 +18,7 @@ class StatisticController extends Controller
      */
     public function index()
     {
-        $statistics = Statistic::paginate(10);
+        $statistics = Statistic::where('status',1)->paginate(10);
 
         return view('statistic.index', compact('statistics'))
             ->with('i', (request()->input('page', 1) - 1) * $statistics->perPage());
@@ -48,7 +48,7 @@ class StatisticController extends Controller
         $statistic = Statistic::create($request->all());
 
         return redirect()->route('statistics.index')
-            ->with('success', 'Statistic created successfully.');
+            ->with('success', 'Estadistica creada correctamente.');
     }
 
     /**
@@ -91,7 +91,7 @@ class StatisticController extends Controller
         $statistic->update($request->all());
 
         return redirect()->route('statistics.index')
-            ->with('success', 'Statistic updated successfully');
+            ->with('success', 'Estadistica actualizada correctamente.');
     }
 
     /**
@@ -101,9 +101,9 @@ class StatisticController extends Controller
      */
     public function destroy($id)
     {
-        $statistic = Statistic::find($id)->delete();
+        $statistic = Statistic::find($id)->update(['status' => 0]);
 
         return redirect()->route('statistics.index')
-            ->with('success', 'Statistic deleted successfully');
+            ->with('success', 'Estadistica eliminada correctamente.');
     }
 }

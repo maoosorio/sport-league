@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property PlayerTeam[] $playerTeams
  * @property Team[] $teams
  * @property Tournament[] $tournaments
- * @property User $user
+ * @property Admin $admin
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -27,8 +27,7 @@ class League extends Model
     
     static $rules = [
 		'name' => 'required',
-		'id_user' => 'required',
-		'status' => 'required',
+		'id_admin' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +37,7 @@ class League extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','id_user','status'];
+    protected $fillable = ['name','id_admin','status'];
 
 
     /**
@@ -76,9 +75,9 @@ class League extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function admin()
     {
-        return $this->hasOne('App\Models\User', 'id', 'id_user');
+        return $this->hasOne('App\Models\Admin', 'id', 'id_admin');
     }
     
 

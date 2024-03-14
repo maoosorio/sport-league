@@ -25,7 +25,6 @@ class Tournament extends Model
     static $rules = [
 		'name' => 'required',
 		'id_league' => 'required',
-		'status' => 'required',
     ];
 
     protected $perPage = 20;

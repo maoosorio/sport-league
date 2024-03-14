@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreign('away_team_id')->references('id')->on('teams');
             $table->foreign('field_id')->references('id')->on('fields');
             $table->foreign('referee_id')->references('id')->on('referees');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
