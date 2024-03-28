@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Referee;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -45,7 +47,17 @@ class RefereeController extends Controller
     {
         request()->validate(Referee::$rules);
 
-        $referee = Referee::create($request->all());
+        $data = $request->all();
+
+        if($request->has('referee_photo_path')){
+            $file = $request->file('referee_photo_path');
+            $destinationPath = 'images/referees/';
+            $filename = time().'-'. $file->getClientOriginalName();
+            $uploadSuccess = $request ->file('referee_photo_path')->move($destinationPath,$filename);
+            $data['referee_photo_path'] = $destinationPath . $filename;
+        }
+
+        $referee = Referee::create($data);
 
         return redirect()->route('referees.index')
             ->with('success', 'Arbitro creado correctamente.');

@@ -70,6 +70,14 @@
 {{ $player->player_photo_path }}
 </div>
 <div class="form-group">
+<strong>Id League:</strong>
+{{ $player->id_league }}
+</div>
+<div class="form-group">
+<strong>Id Team:</strong>
+{{ $player->id_team }}
+</div>
+<div class="form-group">
 <strong>Status:</strong>
 {{ $player->status }}
 </div>

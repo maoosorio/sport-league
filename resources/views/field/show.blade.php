@@ -1,6 +1,6 @@
 @extends('tablar::page')
 
-@section('title', 'View Field')
+@section('title', 'Ver Campo')
 
 @section('content')
     <!-- Page header -->
@@ -10,10 +10,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        View
+                        Ver
                     </div>
                     <h2 class="page-title">
-                        {{ __('Field ') }}
+                        {{ __('Campo ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -28,7 +28,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Field List
+                            Regresar
                         </a>
                     </div>
                 </div>
@@ -50,20 +50,16 @@
                         <div class="card-body">
                             
 <div class="form-group">
-<strong>Name:</strong>
+<strong>Nombre:</strong>
 {{ $field->name }}
 </div>
 <div class="form-group">
-<strong>Location:</strong>
-{{ $field->location }}
+<strong>Ubicacion:</strong>
+<a target="_blank" href="{{ $field->location }}">Ir al Mapa</a>
 </div>
 <div class="form-group">
-<strong>Field Photo Path:</strong>
-{{ $field->field_photo_path }}
-</div>
-<div class="form-group">
-<strong>Status:</strong>
-{{ $field->status }}
+<strong>Foto:</strong>
+<img class="img img-fluid" src="{{ asset($field->field_photo_path) }}" alt="{{ $field->name }}" width = "150" />
 </div>
 
                         </div>

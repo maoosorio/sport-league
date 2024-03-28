@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    Equipo
+    Equipos
 @endsection
 
 @section('content')

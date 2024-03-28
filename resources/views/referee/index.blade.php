@@ -1,7 +1,7 @@
 @extends('tablar::page')
 
 @section('title')
-    Referee
+    Arbitrosa
 @endsection
 
 @section('content')
@@ -12,10 +12,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        List
+                        Lista
                     </div>
                     <h2 class="page-title">
-                        {{ __('Referee ') }}
+                        {{ __('Arbitros ') }}
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -30,7 +30,7 @@
                                 <line x1="12" y1="5" x2="12" y2="19"/>
                                 <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                            Create Referee
+                            Crear Arbitro
                         </a>
                     </div>
                 </div>
@@ -52,15 +52,15 @@
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
                                 <div class="text-muted">
-                                    Show
+                                    Mostrar
                                     <div class="mx-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm" value="10" size="3"
                                                aria-label="Invoices count">
                                     </div>
-                                    entries
+                                    registros
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
+                                    Buscar:
                                     <div class="ms-2 d-inline-block">
                                         <input type="text" class="form-control form-control-sm"
                                                aria-label="Search invoice">
@@ -85,9 +85,8 @@
                                         </svg>
                                     </th>
                                     
-										<th>Name</th>
-										<th>Referee Photo Path</th>
-										<th>Status</th>
+										<th>Nombre</th>
+										<th>Foto</th>
 
                                     <th class="w-1"></th>
                                 </tr>
@@ -101,24 +100,23 @@
                                         <td>{{ ++$i }}</td>
                                         
 											<td>{{ $referee->name }}</td>
-											<td>{{ $referee->referee_photo_path }}</td>
-											<td>{{ $referee->status }}</td>
+											<td><img src="{{ asset($referee->referee_photo_path) }}" alt="{{ $referee->name }}" width = "100"></td>
 
                                         <td>
                                             <div class="btn-list flex-nowrap">
                                                 <div class="dropdown">
                                                     <button class="btn dropdown-toggle align-text-top"
                                                             data-bs-toggle="dropdown">
-                                                        Actions
+                                                        Acciones
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-end">
                                                         <a class="dropdown-item"
                                                            href="{{ route('referees.show',$referee->id) }}">
-                                                            View
+                                                            Ver
                                                         </a>
                                                         <a class="dropdown-item"
                                                            href="{{ route('referees.edit',$referee->id) }}">
-                                                            Edit
+                                                            Editar
                                                         </a>
                                                         <form
                                                             action="{{ route('referees.destroy',$referee->id) }}"
@@ -129,7 +127,7 @@
                                                                     onclick="if(!confirm('Do you Want to Proceed?')){return false;}"
                                                                     class="dropdown-item text-red"><i
                                                                     class="fa fa-fw fa-trash"></i>
-                                                                Delete
+                                                                Borrar
                                                             </button>
                                                         </form>
                                                     </div>
@@ -138,7 +136,7 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <td>No Data Found</td>
+                                    <td>Sin Datos</td>
                                 @endforelse
                                 </tbody>
 

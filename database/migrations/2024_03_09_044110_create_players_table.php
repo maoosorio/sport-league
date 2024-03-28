@@ -18,6 +18,10 @@ return new class extends Migration
             $table->integer('number');
             $table->string('birthdate');
             $table->string('player_photo_path', 2048)->nullable();
+            $table->unsignedBigInteger('id_league');
+            $table->foreign('id_league')->references('id')->on('leagues');
+            $table->unsignedBigInteger('id_team');
+            $table->foreign('id_team')->references('id')->on('teams');
             $table->integer('status')->default(1);
             $table->timestamps();
         });

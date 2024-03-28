@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Field;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -45,7 +47,17 @@ class FieldController extends Controller
     {
         request()->validate(Field::$rules);
 
-        $field = Field::create($request->all());
+        $data = $request->all();
+
+        if($request->has('field_photo_path')){
+            $file = $request->file('field_photo_path');
+            $destinationPath = 'images/fields/';
+            $filename = time().'-'. $file->getClientOriginalName();
+            $uploadSuccess = $request ->file('field_photo_path')->move($destinationPath,$filename);
+            $data['field_photo_path'] = $destinationPath . $filename;
+        }
+
+        $field = Field::create($data);
 
         return redirect()->route('fields.index')
             ->with('success', 'Campo creado correctamente.');

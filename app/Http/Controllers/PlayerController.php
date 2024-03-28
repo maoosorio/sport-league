@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 /**
@@ -45,7 +47,17 @@ class PlayerController extends Controller
     {
         request()->validate(Player::$rules);
 
-        $player = Player::create($request->all());
+        $data = $request->all();
+
+        if($request->has('player_photo_path')){
+            $file = $request->file('player_photo_path');
+            $destinationPath = 'images/players/';
+            $filename = time().'-'. $file->getClientOriginalName();
+            $uploadSuccess = $request ->file('player_photo_path')->move($destinationPath,$filename);
+            $data['player_photo_path'] = $destinationPath . $filename;
+        }
+
+        $player = Player::create($data);
 
         return redirect()->route('players.index')
             ->with('success', 'Jugador creado correctamente.');

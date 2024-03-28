@@ -45,6 +45,24 @@
     </div>
 </div>
 <div class="form-group mb-3">
+    <label class="form-label">   {{ Form::label('id_league') }}</label>
+    <div>
+        {{ Form::text('id_league', $player->id_league, ['class' => 'form-control' .
+        ($errors->has('id_league') ? ' is-invalid' : ''), 'placeholder' => 'Id League']) }}
+        {!! $errors->first('id_league', '<div class="invalid-feedback">:message</div>') !!}
+        <small class="form-hint">player <b>id_league</b> instruction.</small>
+    </div>
+</div>
+<div class="form-group mb-3">
+    <label class="form-label">   {{ Form::label('id_team') }}</label>
+    <div>
+        {{ Form::text('id_team', $player->id_team, ['class' => 'form-control' .
+        ($errors->has('id_team') ? ' is-invalid' : ''), 'placeholder' => 'Id Team']) }}
+        {!! $errors->first('id_team', '<div class="invalid-feedback">:message</div>') !!}
+        <small class="form-hint">player <b>id_team</b> instruction.</small>
+    </div>
+</div>
+<div class="form-group mb-3">
     <label class="form-label">   {{ Form::label('status') }}</label>
     <div>
         {{ Form::text('status', $player->status, ['class' => 'form-control' .

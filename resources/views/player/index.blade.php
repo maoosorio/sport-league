@@ -90,6 +90,8 @@
 										<th>Number</th>
 										<th>Birthdate</th>
 										<th>Player Photo Path</th>
+										<th>Id League</th>
+										<th>Id Team</th>
 										<th>Status</th>
 
                                     <th class="w-1"></th>
@@ -108,6 +110,8 @@
 											<td>{{ $player->number }}</td>
 											<td>{{ $player->birthdate }}</td>
 											<td>{{ $player->player_photo_path }}</td>
+											<td>{{ $player->id_league }}</td>
+											<td>{{ $player->id_team }}</td>
 											<td>{{ $player->status }}</td>
 
                                         <td>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('fields', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('location');
+            $table->string('location',300);
             $table->string('field_photo_path', 2048)->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();

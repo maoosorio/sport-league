@@ -1,46 +1,42 @@
 
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('name') }}</label>
+    <label class="form-label">   {{ Form::label('Nombre') }}</label>
     <div>
         {{ Form::text('name', $field->name, ['class' => 'form-control' .
-        ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+        ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Nombre']) }}
         {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">field <b>name</b> instruction.</small>
+        <small class="form-hint">campo <b>nombre</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('location') }}</label>
+    <label class="form-label">   {{ Form::label('Ubicacion') }}</label>
     <div>
         {{ Form::text('location', $field->location, ['class' => 'form-control' .
-        ($errors->has('location') ? ' is-invalid' : ''), 'placeholder' => 'Location']) }}
+        ($errors->has('location') ? ' is-invalid' : ''), 'placeholder' => 'Ubicacion']) }}
         {!! $errors->first('location', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">field <b>location</b> instruction.</small>
+        <small class="form-hint">campo <b>ubicacion</b> requerido.</small>
     </div>
 </div>
 <div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('field_photo_path') }}</label>
+    <label class="form-label">   {{ Form::label('Foto') }}</label>
+    @if ($field->field_photo_path <> null)
+    <div class="mb-2">
+        <img src="{{ asset($field->field_photo_path) }}" alt="{{ $field->name }}" width = "150">
+    </div>
+    @endif
     <div>
-        {{ Form::text('field_photo_path', $field->field_photo_path, ['class' => 'form-control' .
-        ($errors->has('field_photo_path') ? ' is-invalid' : ''), 'placeholder' => 'Field Photo Path']) }}
+        {{ Form::file('field_photo_path', null, ['class' => 'form-control-file' .
+        ($errors->has('field_photo_path') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
         {!! $errors->first('field_photo_path', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">field <b>field_photo_path</b> instruction.</small>
-    </div>
-</div>
-<div class="form-group mb-3">
-    <label class="form-label">   {{ Form::label('status') }}</label>
-    <div>
-        {{ Form::text('status', $field->status, ['class' => 'form-control' .
-        ($errors->has('status') ? ' is-invalid' : ''), 'placeholder' => 'Status']) }}
-        {!! $errors->first('status', '<div class="invalid-feedback">:message</div>') !!}
-        <small class="form-hint">field <b>status</b> instruction.</small>
+        <small class="form-hint">campo <b>foto</b> requerido.</small>
     </div>
 </div>
 
     <div class="form-footer">
         <div class="text-end">
             <div class="d-flex">
-                <a href="#" class="btn btn-danger">Cancel</a>
-                <button type="submit" class="btn btn-primary ms-auto ajax-submit">Submit</button>
+                <a href="{{ route('fields.index') }}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary ms-auto ajax-submit">Guardar</button>
             </div>
         </div>
     </div>
